@@ -1,6 +1,6 @@
 .log
 node_modules
-/**/[Ll]ibrary/
+**/[Ll]ibrary/
 **/[Tt]emp/
 **/[Oo]bj/
 **/[Bb]uild/
@@ -8,3 +8,4 @@ node_modules
 **/UserSettings/
 *.csproj
 *.sln
+
