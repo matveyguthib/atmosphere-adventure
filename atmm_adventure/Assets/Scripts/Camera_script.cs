@@ -1,26 +1,23 @@
 using UnityEngine;
-using System;
 
-namespace ConsoleApp2
+public class CameraFollow2D : MonoBehaviour
 {
-    class characterscript : MonoBehaviour
+    public Transform target;        // Персонаж, за которым следит камера
+    public Vector3 offset = new Vector3(0, 0, -10); // Смещение (обычно по Z = -10 для ортографической камеры)
+    public float smoothSpeed = 5f;  // Скорость сглаживания
+
+    void LateUpdate()
     {
-        public Transform target;
-        private Vector3 _startedPos;
-        private float _speed = 5f;
-
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        if (target == null)
         {
-            _startedPos = transform.position;
+            Debug.LogWarning("Камера: цель не назначена!");
+            return;
         }
-        // Update is called once per frame
-        void Update()
-        {
-            var targetCamera = transform.position + _startedPos;
-            transform.position = Vector3.Lerp(transform.position, targetCamera, _speed * Time.deltaTime);
-            transform.LookAt(target);
 
-        }
+        // Желаемая позиция камеры = позиция персонажа + смещение
+        Vector3 desiredPosition = target.position + offset;
+
+        // Плавно перемещаем камеру к желаемой позиции
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
     }
 }
